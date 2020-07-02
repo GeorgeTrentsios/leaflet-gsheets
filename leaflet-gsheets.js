@@ -147,7 +147,7 @@ function addPoints(data) {
   // marker: standard point with an icon
   // circleMarker: a circle with a radius set in pixels
   // circle: a circle with a radius set in meters
-  var markerType = "marker";
+  var markerType = "circleMarker";
 
   // Marker radius
   // Wil be in pixels for circleMarker, metres for circle
