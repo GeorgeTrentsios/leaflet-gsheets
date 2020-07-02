@@ -4,7 +4,10 @@
  * Script to display two tables from Google Sheets as point and polygon layers using Leaflet
  * The Sheets are then imported using Tabletop.js and overwrite the initially laded layers
  */
-
+var myLocation = {
+  Latitude: 0,
+  longitude:0
+};
 // init() is called as soon as the page loads
 function init() {
   // PASTE YOUR URLs HERE
@@ -19,8 +22,20 @@ function init() {
   //var pointsURL ="https://docs.google.com/spreadsheets/d/1hEO51Lt59-IIrnAfDuB7eOJaKBYm5C_fdWIWEq4hLho/edit?usp=sharing"; 
   var pointsURL ="https://docs.google.com/spreadsheets/d/12Vkhj0GkPqvW2ID6__5OME4Q018o7qCKQubnl1PYofg/edit?usp=sharing";  //GTRE
   var polyURL ="https://docs.google.com/spreadsheets/d/1bCc8n_SV5mPKhHCsNVPCLKpoQRMziLtg2AMrlS517Qo/edit?usp=sharing" //GTRE
+  getLocation();
   Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true });
-  Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data
+  Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data  
+}
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(setPositionCoords);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function setPositionCoords(position) {
+ myLocation.Latitude  = position.coords.latitude;
+ myLocation.longitude = position.coords.longitude;
 }
 window.addEventListener("DOMContentLoaded", init);
 
