@@ -1,5 +1,13 @@
 [
  {
+ 
+   "lat": 37.750518,
+   "long": --122.460274,
+   "category": "Paparia ",
+   "location": "San Francisco",
+   "level": "Local"
+ }, 
+ {
    "lat": 37,
    "long": -120,
    "category": "Coffee Shop",
