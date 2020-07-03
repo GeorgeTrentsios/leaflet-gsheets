@@ -32,7 +32,8 @@
     <script src="js/leaflet.awesome-markers.min.js"></script>
     <script src="js/tabletop.min.js"></script>
     <script src="leaflet-gsheets.js"></script>
-<!-- George Trentios Boot strap modal to get/confirm address--!>  
+    
+<!-- George Trentios Boot strap modal to get/confirm address Start -->  
 <div class="modal fade" id="UserAddressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -48,12 +49,12 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Show map</button>
-        <button type="button" class="btn btn-primary"   data-dismiss="modal">Show address in map</button>
+        <button type="button" id="addressBtnShow"    class="btn btn-secondary" data-dismiss="modal">Show map</button>
+        <button type="button" id="addressBtnShowLoc" class="btn btn-primary"   data-dismiss="modal">Show address in map</button>
       </div>
     </div>
   </div>
 </div>
-  
+<!-- George Trentios Boot strap modal to get/confirm address End-->  
 </body>
 </html>
