@@ -61,7 +61,7 @@ window.addEventListener("DOMContentLoaded", init);
 //George Trentsios Encapsulate map creation in a function
 function mapCreate(){
   // Create a new Leaflet map centered on the continental US
-  var map = L.map("map").setView([myLocation.latitude: , -myLocation.longitude:-], 4);
+  var map = L.map("map").setView([myLocation.latitude: , myLocation.longitude], 4);
 
   // This is the Carto Positron basemap
   var basemap = L.tileLayer(
