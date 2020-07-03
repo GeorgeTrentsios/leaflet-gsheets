@@ -35,9 +35,12 @@ function getLocation() {
     //Supported Get position after user acceptance
     navigator.geolocation.getCurrentPosition(setPositionCoords);
   } else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
     //Not Supported Ask user to enter an address
-    
+      $('#UserAddressModal').on('show.bs.modal', function (event) {
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+      });    
   }
 }
 //Set user location ad global variable
