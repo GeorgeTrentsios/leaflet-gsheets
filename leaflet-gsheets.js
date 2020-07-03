@@ -21,7 +21,7 @@ function init() {
 
   //var polyURL ="https://docs.google.com/spreadsheets/d/1cxH2l6Z0-wlgzLQgJs4-eMsDZQAq2XrLwQpf04e3Mx8/edit?usp=sharing";
   //var pointsURL ="https://docs.google.com/spreadsheets/d/1hEO51Lt59-IIrnAfDuB7eOJaKBYm5C_fdWIWEq4hLho/edit?usp=sharing"; 
-  getLocation(fnCallBack);
+  getLocation(showMap);
 /*  
   var pointsURL ="https://docs.google.com/spreadsheets/d/12Vkhj0GkPqvW2ID6__5OME4Q018o7qCKQubnl1PYofg/edit?usp=sharing";  //GTRE
   var polyURL ="https://docs.google.com/spreadsheets/d/1bCc8n_SV5mPKhHCsNVPCLKpoQRMziLtg2AMrlS517Qo/edit?usp=sharing" //GTRE
@@ -54,6 +54,7 @@ function showMap(showLocation) {
     if (showLocation === true) {
         
     }
+  mapCreate();
 }
 
 window.addEventListener("DOMContentLoaded", init);
