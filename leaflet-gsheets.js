@@ -35,12 +35,15 @@ function getLocation() {
   if (navigator.geolocation) {
     //Supported Get position after user acceptance
     navigator.geolocation.getCurrentPosition(setPositionCoords);
-  } 
+  } else {
+     mapCreate();
+  }
 }
 //Set user location ad global variable
 function setPositionCoords(position) {
    myLocation.latitude  = position.coords.latitude;
    myLocation.longitude = position.coords.longitude;
+   mapCreate();
 }
 //Initialize TableTop library
 function initTableTop(){
