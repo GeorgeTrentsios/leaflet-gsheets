@@ -20,22 +20,37 @@ function init() {
 
   //var polyURL ="https://docs.google.com/spreadsheets/d/1cxH2l6Z0-wlgzLQgJs4-eMsDZQAq2XrLwQpf04e3Mx8/edit?usp=sharing";
   //var pointsURL ="https://docs.google.com/spreadsheets/d/1hEO51Lt59-IIrnAfDuB7eOJaKBYm5C_fdWIWEq4hLho/edit?usp=sharing"; 
+  getLocation();
+/*  
   var pointsURL ="https://docs.google.com/spreadsheets/d/12Vkhj0GkPqvW2ID6__5OME4Q018o7qCKQubnl1PYofg/edit?usp=sharing";  //GTRE
   var polyURL ="https://docs.google.com/spreadsheets/d/1bCc8n_SV5mPKhHCsNVPCLKpoQRMziLtg2AMrlS517Qo/edit?usp=sharing" //GTRE
-  getLocation();
   Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true });
   Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data  
+*/  
 }
+/** George Trentsios Additional code**/
+//Check if device supports GPS location
 function getLocation() {
   if (navigator.geolocation) {
+    //Supported Get position after user acceptance
     navigator.geolocation.getCurrentPosition(setPositionCoords);
   } else {
     x.innerHTML = "Geolocation is not supported by this browser.";
+    //Not Supported Ask user to enter an address
+    
   }
 }
+//Set user location ad global variable
 function setPositionCoords(position) {
  myLocation.Latitude  = position.coords.latitude;
  myLocation.longitude = position.coords.longitude;
+}
+//Initialize TableTop library
+function initTableTop(){
+  var pointsURL ="https://docs.google.com/spreadsheets/d/12Vkhj0GkPqvW2ID6__5OME4Q018o7qCKQubnl1PYofg/edit?usp=sharing";  //GTRE
+  var polyURL ="https://docs.google.com/spreadsheets/d/1bCc8n_SV5mPKhHCsNVPCLKpoQRMziLtg2AMrlS517Qo/edit?usp=sharing" //GTRE
+  Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true });
+  Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data  
 }
 window.addEventListener("DOMContentLoaded", init);
 
