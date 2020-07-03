@@ -99,21 +99,25 @@ function mapCreate(){
   map.on("click", function() {
     sidebar.close(panelID);
   });
-  var tiles = L.esri.basemapLayer("Streets").addTo(map);
+/** George Trentsios add address search Start*/  
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
 
-  // create the geocoding control and add it to the map
-  var searchControl = L.esri.Geocoding.geosearch().addTo(map);
+  var arcgisOnline = L.esri.Geocoding.arcgisOnlineProvider();
 
-  // create an empty layer group to store the results and add it to the map
-  var results = L.layerGroup().addTo(map);
-
-  // listen for the results event and add every result to the map
-  searchControl.on("results", function(data) {
-      results.clearLayers();
-      for (var i = data.results.length - 1; i >= 0; i--) {
-          results.addLayer(L.marker(data.results[i].latlng));
-      }
-    });  
+  L.esri.Geocoding.geosearch({
+    providers: [
+      arcgisOnline,
+      L.esri.Geocoding.mapServiceProvider({
+        label: 'Search address',
+        url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
+        layers: [2, 3],
+        searchFields: ['NAME', 'STATE_NAME']
+      })
+    ]
+  }).addTo(map);
+/** George Trentsios add address search End*/    
 }
 // These are declared outisde the functions so that the functions can check if they already exist
 var polygonLayer;
