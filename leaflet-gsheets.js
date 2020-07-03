@@ -5,9 +5,10 @@
  * The Sheets are then imported using Tabletop.js and overwrite the initially laded layers
  */
 var myLocation = {
-  Latitude: 0,
-  longitude:0
+  latitude: 40,   //US Default 
+  longitude:-100  //US Default 
 };
+
 // init() is called as soon as the page loads
 function init() {
   // PASTE YOUR URLs HERE
@@ -20,7 +21,7 @@ function init() {
 
   //var polyURL ="https://docs.google.com/spreadsheets/d/1cxH2l6Z0-wlgzLQgJs4-eMsDZQAq2XrLwQpf04e3Mx8/edit?usp=sharing";
   //var pointsURL ="https://docs.google.com/spreadsheets/d/1hEO51Lt59-IIrnAfDuB7eOJaKBYm5C_fdWIWEq4hLho/edit?usp=sharing"; 
-  getLocation();
+  getLocation(fnCallBack);
 /*  
   var pointsURL ="https://docs.google.com/spreadsheets/d/12Vkhj0GkPqvW2ID6__5OME4Q018o7qCKQubnl1PYofg/edit?usp=sharing";  //GTRE
   var polyURL ="https://docs.google.com/spreadsheets/d/1bCc8n_SV5mPKhHCsNVPCLKpoQRMziLtg2AMrlS517Qo/edit?usp=sharing" //GTRE
@@ -34,19 +35,12 @@ function getLocation() {
   if (navigator.geolocation) {
     //Supported Get position after user acceptance
     navigator.geolocation.getCurrentPosition(setPositionCoords);
-  } else {
-    //Not Supported Ask user to enter an address
-      $('#UserAddressModal').on('show.bs.modal', function (event) {
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-      });    
-  }
+  } 
 }
 //Set user location ad global variable
 function setPositionCoords(position) {
- myLocation.Latitude  = position.coords.latitude;
- myLocation.longitude = position.coords.longitude;
+   myLocation.latitude  = position.coords.latitude;
+   myLocation.longitude = position.coords.longitude;
 }
 //Initialize TableTop library
 function initTableTop(){
@@ -55,44 +49,68 @@ function initTableTop(){
   Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true });
   Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data  
 }
+
+function showMap(showLocation) {
+    if (showLocation === true) {
+        
+    }
+}
+
 window.addEventListener("DOMContentLoaded", init);
 
-// Create a new Leaflet map centered on the continental US
-var map = L.map("map").setView([40, -100], 4);
+//George Trentsios Encapsulate map creation in a function
+function mapCreate(){
+  // Create a new Leaflet map centered on the continental US
+  var map = L.map("map").setView([myLocation.latitude: , -myLocation.longitude:-], 4);
 
-// This is the Carto Positron basemap
-var basemap = L.tileLayer(
-  "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png",
-  {
-    attribution:
-      "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>",
-    subdomains: "abcd",
-    maxZoom: 19
-  }
-);
-basemap.addTo(map);
+  // This is the Carto Positron basemap
+  var basemap = L.tileLayer(
+    "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png",
+    {
+      attribution:
+        "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>",
+      subdomains: "abcd",
+      maxZoom: 19
+    }
+  );
+  basemap.addTo(map);
 
-var sidebar = L.control
-  .sidebar({
-    container: "sidebar",
-    closeButton: true,
-    position: "right"
-  })
-  .addTo(map);
+  var sidebar = L.control
+    .sidebar({
+      container: "sidebar",
+      closeButton: true,
+      position: "right"
+    })
+    .addTo(map);
 
-let panelID = "my-info-panel";
-var panelContent = {
-  id: panelID,
-  tab: "<i class='fa fa-bars active'></i>",
-  pane: "<p id='sidebar-content'></p>",
-  title: "<h2 id='sidebar-title'>No state selected</h2>"
-};
-sidebar.addPanel(panelContent);
+  let panelID = "my-info-panel";
+  var panelContent = {
+    id: panelID,
+    tab: "<i class='fa fa-bars active'></i>",
+    pane: "<p id='sidebar-content'></p>",
+    title: "<h2 id='sidebar-title'>No state selected</h2>"
+  };
+  sidebar.addPanel(panelContent);
 
-map.on("click", function() {
-  sidebar.close(panelID);
-});
+  map.on("click", function() {
+    sidebar.close(panelID);
+  });
+  var tiles = L.esri.basemapLayer("Streets").addTo(map);
 
+  // create the geocoding control and add it to the map
+  var searchControl = L.esri.Geocoding.geosearch().addTo(map);
+
+  // create an empty layer group to store the results and add it to the map
+  var results = L.layerGroup().addTo(map);
+
+  // listen for the results event and add every result to the map
+  searchControl.on("results", function(data) {
+      results.clearLayers();
+      for (var i = data.results.length - 1; i >= 0; i--) {
+          results.addLayer(L.marker(data.results[i].latlng));
+      }
+    });  
+}
 // These are declared outisde the functions so that the functions can check if they already exist
 var polygonLayer;
 var pointGroupLayer;
