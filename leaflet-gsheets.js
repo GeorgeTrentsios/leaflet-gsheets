@@ -18,9 +18,9 @@ function init() {
 
 //Initialize TableTop library
 function initTableTop(){
-  
-  var pointsURL ="https://docs.google.com/spreadsheets/d/e/2PACX-1vRTKDtK5s8aIOF9wN68WtUyBbioIX0Tp0PX128a18PNANPG9ST2qA2jmC0zGbHbATPa0NPp3uE015-P/pubhtml";  //GTRE
-  var polyURL ="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgVLsAsSV5NitmCrLvi_q2yp8AmCzJ6J0CcX8CAXPvJwPcrOQ54V1MsVzib8JsHrK8zLhz6PSmusbW/pubhtml" //GTRE
+  //George Trentsios αλλάγη εκτός χρόνου μόνο το url των google documents σε JSON Format
+  var pointsURL ="https://spreadsheets.google.com/feeds/cells/12Vkhj0GkPqvW2ID6__5OME4Q018o7qCKQubnl1PYofg/1/public/full?alt=json";  //GTRE
+  var polyURL ="https://spreadsheets.google.com/feeds/cells/1bCc8n_SV5mPKhHCsNVPCLKpoQRMziLtg2AMrlS517Qo/1/public/full?alt=json" //GTRE
   /*
   var polyURL =
     "https://docs.google.com/spreadsheets/d/1EUFSaqi30b6oefK0YWWNDDOzwmCTTXlXkFHAc2QrUxM/edit?usp=sharing";
