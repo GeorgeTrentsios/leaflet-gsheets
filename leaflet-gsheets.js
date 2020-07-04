@@ -19,7 +19,7 @@ function init() {
 //Initialize TableTop library
 function initTableTop(){
   
-  var pointsURL ="https://docs.google.com/spreadsheets/d/12Vkhj0GkPqvW2ID6__5OME4Q018o7qCKQubnl1PYofg/edit?usp=sharing";  //GTRE
+  var pointsURL ="https://docs.google.com/spreadsheets/d/e/2PACX-1vRTKDtK5s8aIOF9wN68WtUyBbioIX0Tp0PX128a18PNANPG9ST2qA2jmC0zGbHbATPa0NPp3uE015-P/pubhtml";  //GTRE
   var polyURL ="https://docs.google.com/spreadsheets/d/1bCc8n_SV5mPKhHCsNVPCLKpoQRMziLtg2AMrlS517Qo/edit?usp=sharing" //GTRE
   /*
   var polyURL =
