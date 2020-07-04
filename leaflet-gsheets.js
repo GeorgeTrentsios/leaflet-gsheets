@@ -8,7 +8,7 @@ var myLocation = {
   latitude: 40,   //US Default 
   longitude:-100  //US Default 
 };
-
+var map = null;
 // init() is called as soon as the page loads
 function init() {
   initTableTop(); //Initialize tableTop library
@@ -50,7 +50,7 @@ function onLocationError(e) {
 //George Trentsios Encapsulate map creation in a function
 function mapCreate(){
   // Create a new Leaflet map centered on the continental US
-  var map = L.map("map").setView([myLocation.latitude , myLocation.longitude], 4);
+  map = L.map("map").setView([myLocation.latitude , myLocation.longitude], 4);
 
   // This is the Carto Positron basemap
   var basemap = L.tileLayer(
