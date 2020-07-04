@@ -11,40 +11,11 @@ var myLocation = {
 
 // init() is called as soon as the page loads
 function init() {
-  // PASTE YOUR URLs HERE
-
-  // these URLs come from Google Sheets 'shareable link' form
-  // the first is the polygon layer and the second the points
-  //var polyURL ="https://docs.google.com/spreadsheets/d/e/2PACX-1vR56hl4sLcz3OAT3Vsb-dSEHMEm3QA8TSyJLu8CFnOVmPnpCdOHybH1opIn11WDvbVyw33ROi6Uzmnd/pubhtml";
-    //"https://docs.google.com/spreadsheets/d/1EUFSaqi30b6oefK0YWWNDDOzwmCTTXlXkFHAc2QrUxM/edit?usp=sharing";
-  //var pointsURL ="https://docs.google.com/spreadsheets/d/1yIniMddiTvVcJFBO45tjeD6tSShpMJln9DfPcbKg0dU/edit?usp=sharing";
-
-  //var polyURL ="https://docs.google.com/spreadsheets/d/1cxH2l6Z0-wlgzLQgJs4-eMsDZQAq2XrLwQpf04e3Mx8/edit?usp=sharing";
-  //var pointsURL ="https://docs.google.com/spreadsheets/d/1hEO51Lt59-IIrnAfDuB7eOJaKBYm5C_fdWIWEq4hLho/edit?usp=sharing"; 
-  getLocation(showMap);
-/*  
-  var pointsURL ="https://docs.google.com/spreadsheets/d/12Vkhj0GkPqvW2ID6__5OME4Q018o7qCKQubnl1PYofg/edit?usp=sharing";  //GTRE
-  var polyURL ="https://docs.google.com/spreadsheets/d/1bCc8n_SV5mPKhHCsNVPCLKpoQRMziLtg2AMrlS517Qo/edit?usp=sharing" //GTRE
-  Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true });
-  Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data  
-*/  
+  initTableTop(); //Initialize tableTop library
+  mapCreate();    //Create Map
 }
 /** George Trentsios Additional code**/
-//Check if device supports GPS location
-function getLocation() {
-  if (navigator.geolocation) {
-    //Supported Get position after user acceptance
-    navigator.geolocation.getCurrentPosition(setPositionCoords);
-  } else {
-     mapCreate();
-  }
-}
-//Set user location ad global variable
-function setPositionCoords(position) {
-   myLocation.latitude  = position.coords.latitude;
-   myLocation.longitude = position.coords.longitude;
-   mapCreate();
-}
+
 //Initialize TableTop library
 function initTableTop(){
   /*
@@ -60,15 +31,22 @@ function initTableTop(){
   Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data  
 }
 
-function showMap(showLocation) {
-    if (showLocation === true) {
-        
-    }
-  mapCreate();
+window.addEventListener("DOMContentLoaded", init); //Call init after document load
+//George Trentsios Customn Code Start
+/* Event user located */
+function onLocationFound(e) {
+    //Add a marker to user  location
+    var radius = e.accuracy;
+    L.marker(e.latlng).addTo(map)
+        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+    L.circle(e.latlng, radius).addTo(map);
 }
-
-window.addEventListener("DOMContentLoaded", init);
-
+/* Event error locating user */
+function onLocationError(e) {
+   //Inform user and aks  him to enter his address
+   alert("Your location not founded, You can enter it by searching it wiht the magnifier");
+}
+//George Trentsios Customn Code End
 //George Trentsios Encapsulate map creation in a function
 function mapCreate(){
   // Create a new Leaflet map centered on the continental US
@@ -106,7 +84,8 @@ function mapCreate(){
   map.on("click", function() {
     sidebar.close(panelID);
   });
-/** George Trentsios add address search Start*/  
+//George Trentsios Customn Code Start
+  /** George Trentsios add address search Start*/  
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
@@ -114,18 +93,30 @@ function mapCreate(){
   var arcgisOnline = L.esri.Geocoding.arcgisOnlineProvider();
 
   L.esri.Geocoding.geosearch({
+    {
+     placeholder:"Give your address",
+     title:"Search for an address" 
+    },
     providers: [
       arcgisOnline,
       L.esri.Geocoding.mapServiceProvider({
-        label: 'Search address',
+        label: 'Founded Addresses',
         url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
         layers: [2, 3],
-        searchFields: ['NAME', 'STATE_NAME']
+        searchFields: ['ADDRESS', ,"CITY",'COUNTRY']
       })
     ]
   }).addTo(map);
-/** George Trentsios add address search End*/    
+  var results = L.layerGroup().addTo(map);
+  searchControl.on('results', function (data) {
+    map.fitBounds(response.results[0].bounds);  //George trentsios center map at given address
+  });  
+  map.locate({setView: true, maxZoom: 18});    //George Trentsis start getting user location
+  map.on('locationfound', onLocationFound);  
+ /** George Trentsios add address search End*/    
+//George Trentsios Customn Code End   
 }
+
 // These are declared outisde the functions so that the functions can check if they already exist
 var polygonLayer;
 var pointGroupLayer;
