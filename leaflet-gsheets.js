@@ -19,7 +19,7 @@ function init() {
 //Initialize TableTop library
 function initTableTop(){
   //George Trentsios αλλάγη εκτός χρόνου μόνο το url των google documents σε JSON Format
-  var pointsURL ="cells/12Vkhj0GkPqvW2ID6__5OME4Q018o7qCKQubnl1PYofg/1/public/full?alt=json";  //GTRE
+  var pointsURL ="12Vkhj0GkPqvW2ID6__5OME4Q018o7qCKQubnl1PYofg";  //GTRE
   var polyURL ="1EUFSaqi30b6oefK0YWWNDDOzwmCTTXlXkFHAc2QrUxM" //GTRE
   /*
   var polyURL =
