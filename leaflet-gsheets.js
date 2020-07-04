@@ -20,7 +20,8 @@ function init() {
 function initTableTop(){
   //George Trentsios αλλάγη εκτός χρόνου μόνο το url των google documents σε JSON Format
   var pointsURL ="12Vkhj0GkPqvW2ID6__5OME4Q018o7qCKQubnl1PYofg";  //GTRE
-  var polyURL ="1EUFSaqi30b6oefK0YWWNDDOzwmCTTXlXkFHAc2QrUxM" //GTRE
+  var polyURL ="1bCc8n_SV5mPKhHCsNVPCLKpoQRMziLtg2AMrlS517Qo" //GTRE
+  
   /*
   var polyURL =
     "https://docs.google.com/spreadsheets/d/1EUFSaqi30b6oefK0YWWNDDOzwmCTTXlXkFHAc2QrUxM/edit?usp=sharing";
