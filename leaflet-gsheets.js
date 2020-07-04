@@ -93,10 +93,9 @@ function mapCreate(){
   var arcgisOnline = L.esri.Geocoding.arcgisOnlineProvider();
 
   L.esri.Geocoding.geosearch({
-    {
-     placeholder:"Give your address",
-     title:"Search for an address" 
-    },
+    
+    placeholder:"Give your address",
+    title:"Search for an address",
     providers: [
       arcgisOnline,
       L.esri.Geocoding.mapServiceProvider({
