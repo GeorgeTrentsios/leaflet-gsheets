@@ -20,7 +20,7 @@ function init() {
 function initTableTop(){
   
   var pointsURL ="https://docs.google.com/spreadsheets/d/e/2PACX-1vRTKDtK5s8aIOF9wN68WtUyBbioIX0Tp0PX128a18PNANPG9ST2qA2jmC0zGbHbATPa0NPp3uE015-P/pubhtml";  //GTRE
-  var polyURL ="https://docs.google.com/spreadsheets/d/1bCc8n_SV5mPKhHCsNVPCLKpoQRMziLtg2AMrlS517Qo/edit?usp=sharing" //GTRE
+  var polyURL ="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgVLsAsSV5NitmCrLvi_q2yp8AmCzJ6J0CcX8CAXPvJwPcrOQ54V1MsVzib8JsHrK8zLhz6PSmusbW/pubhtml" //GTRE
   /*
   var polyURL =
     "https://docs.google.com/spreadsheets/d/1EUFSaqi30b6oefK0YWWNDDOzwmCTTXlXkFHAc2QrUxM/edit?usp=sharing";
