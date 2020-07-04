@@ -92,20 +92,19 @@ function mapCreate(){
 
   var arcgisOnline = L.esri.Geocoding.arcgisOnlineProvider();
 
-  L.esri.Geocoding.geosearch({
-    
-    placeholder:"Give your address",
-    title:"Search for an address",
-    providers: [
-      arcgisOnline,
-      L.esri.Geocoding.mapServiceProvider({
-        label: 'Founded Addresses',
-        url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
-        layers: [2, 3],
-        searchFields: ['ADDRESS', ,"CITY",'COUNTRY']
-      })
-    ]
-  }).addTo(map);
+  var searchControl = L.esri.Geocoding.geosearch({
+                            placeholder:"Give your address",
+                            title:"Search for an address",
+                            providers: [
+                              arcgisOnline,
+                              L.esri.Geocoding.mapServiceProvider({
+                                label: 'Founded Addresses',
+                                url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
+                                layers: [2, 3],
+                                searchFields: ['ADDRESS', ,"CITY",'COUNTRY']
+                              })
+                            ]
+                        }).addTo(map);
   var results = L.layerGroup().addTo(map);
   searchControl.on('results', function (data) {
     map.fitBounds(response.results[0].bounds);  //George trentsios center map at given address
