@@ -14,6 +14,7 @@ function init() {
   initTableTop(); //Initialize tableTop library
   mapCreate();    //Create Map
 }
+var sidebar = null; //George Trentsios Change after exams for learining reasons
 /** George Trentsios Additional code**/
 
 //Initialize TableTop library
@@ -65,7 +66,7 @@ function mapCreate(){
   );
   basemap.addTo(map);
 
-  var sidebar = L.control
+     sidebar = L.control  //George Trentsios Changed after exams for test learning reasons.
     .sidebar({
       container: "sidebar",
       closeButton: true,
