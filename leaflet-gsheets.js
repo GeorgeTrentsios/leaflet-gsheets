@@ -14,7 +14,14 @@ function init() {
   initTableTop(); //Initialize tableTop library
   mapCreate();    //Create Map
 }
-var sidebar = null; //George Trentsios Change after exams for learining reasons
+var sidebar = null; //George Trentsios Change after exams for learining reasons 
+let panelID = "my-info-panel"; //George Trentsios Changed after exams for test learning reasons.
+var panelContent = {          //George Trentsios Changed after exams for test learning reasons.
+                      id: panelID,
+                      tab: "<i class='fa fa-bars active'></i>",
+                      pane: "<p id='sidebar-content'></p>",
+                      title: "<h2 id='sidebar-title'>No state selected</h2>"
+                  }; //George Trentsios Change after exams for learining reasons
 /** George Trentsios Additional code**/
 
 //Initialize TableTop library
@@ -74,13 +81,15 @@ function mapCreate(){
     })
     .addTo(map);
 
-  let panelID = "my-info-panel";
-  var panelContent = {
+  //let panelID = "my-info-panel"; //George Trentsios Changed after exams for test learning reasons.
+  /*
+  panelContent = {          //George Trentsios Changed after exams for test learning reasons.
     id: panelID,
     tab: "<i class='fa fa-bars active'></i>",
     pane: "<p id='sidebar-content'></p>",
     title: "<h2 id='sidebar-title'>No state selected</h2>"
   };
+  */
   sidebar.addPanel(panelContent);
 
   map.on("click", function() {
